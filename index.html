@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obesity Risk Readout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="scanlines" aria-hidden="true"></div>
+
+<header class="masthead">
+  <p class="eyebrow">Neural Assessment Tool · 4-layer ANN</p>
+  <h1>Obesity Risk Readout</h1>
+  <p class="subhead">Fill in body metrics and lifestyle habits. A trained neural network classifies the profile into one of seven weight categories, from insufficient weight to obesity type III.</p>
+  <p class="status-line" id="status-line">Checking model status…</p>
+</header>
+
+<main class="board">
+
+  <section class="panel intake" aria-label="Intake form">
+    <h2 class="panel-title">Intake</h2>
+    <form id="intake-form" novalidate>
+      <div id="form-fields" class="form-fields">
+        <p class="loading-note">Loading intake form…</p>
+      </div>
+      <button type="submit" id="submit-btn" class="run-btn" disabled>
+        <span class="btn-label">Run assessment</span>
+        <span class="btn-arrow" aria-hidden="true">→</span>
+        <span class="btn-spinner" aria-hidden="true"></span>
+      </button>
+    </form>
+  </section>
+
+  <section class="panel readout" aria-label="Result readout">
+    <h2 class="panel-title">Readout</h2>
+
+    <div id="readout-idle" class="readout-state idle-state">
+      <div class="idle-mark" aria-hidden="true">
+        <svg viewBox="0 0 80 80" width="56" height="56">
+          <circle cx="40" cy="40" r="30" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 6"/>
+          <circle cx="40" cy="40" r="4" fill="currentColor"/>
+        </svg>
+      </div>
+      <p>Awaiting input. Complete the intake form and run the assessment to see a result here.</p>
+    </div>
+
+    <div id="readout-error" class="readout-state error-state hidden">
+      <p class="error-title">Could not complete assessment</p>
+      <p id="error-message"></p>
+    </div>
+
+    <div id="readout-result" class="readout-state result-state hidden">
+      <p class="result-eyebrow">Predicted category</p>
+      <h3 id="result-class">—</h3>
+      <p class="confidence-line">confidence <span id="result-confidence" class="mono">—</span></p>
+
+      <div class="spectrum" aria-hidden="true">
+        <div class="spectrum-track" id="spectrum-track"></div>
+        <div class="spectrum-marker" id="spectrum-marker"></div>
+        <div class="spectrum-ticks" id="spectrum-ticks"></div>
+      </div>
+
+      <div class="prob-breakdown">
+        <p class="breakdown-title">Full distribution</p>
+        <div id="prob-rows"></div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="page-footer">
+  <p>Served from a Flask API · POST <code>/api/predict</code></p>
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
