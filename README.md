@@ -22,7 +22,7 @@ The code and the output along with the prediction are given below.
 
 2. A Flask web app was also built so the model can be used through a UI instead of the command line. The code is saved in the `web/` folder, containing `app.py`, `templates/index.html`, `static/script.js`, and `static/style.css`. A demo recording of the web app is available at `web/Screen Recording 2026-06-20 225435.mp4`.
 ## *Web App*
-![Watch the demo recording](web/Screen%20Recording%202026-06-20%20225435.mp4)
+[Watch the demo recording](web/Screen%20Recording%202026-06-20%20225435.mp4)
 ![App Interface](web/output.png)
 
 ## Final Answer
